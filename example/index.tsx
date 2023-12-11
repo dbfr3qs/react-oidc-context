@@ -16,7 +16,7 @@ const oidcConfig: AuthProviderProps = {
     redirect_uri: "http://localhost:1234/",
     onSigninCallback: onSigninCallback,
     scope: "openid profile email",
-    dpop: false,
+    dpopEnabled: true,
 };
 
 function App() {
