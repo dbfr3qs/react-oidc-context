@@ -94,11 +94,11 @@ export interface AuthProviderPropsBase extends UserManagerSettings {
 /**
  * @public
  */
-export interface AuthProviderUserManagerProps extends Omit<AuthProviderPropsBase, "redirect_uri" | "client_id" | "authority" | "dpop"> {
+export interface AuthProviderUserManagerProps extends Omit<AuthProviderPropsBase, "redirect_uri" | "client_id" | "authority" | "dpopSettings"> {
     redirect_uri?: never;
     client_id?: never;
     authority?: never;
-    dpop?: never;
+    dpopSettings?: never;
 }
 
 /**

@@ -15,7 +15,7 @@ const oidcConfig: AuthProviderProps = {
     client_id: "js_oidc",
     redirect_uri: "http://localhost:1234/",
     onSigninCallback: onSigninCallback,
-    scope: "openid profile email",
+    scope: "openid profile email offline_access",
     dpopSettings: { enabled: true, bind_authorization_code: true },
 };
 
@@ -27,6 +27,7 @@ function App() {
             const url = "https://localhost:5005/identity";
             const token = auth.user?.access_token;
             const DPoPProof = await auth.user?.dpopProof(url) as string;
+
             const response = await fetch("https://localhost:5005/identity", {
                 credentials: "include",
                 mode: "cors",
@@ -58,6 +59,7 @@ function App() {
                     Log out
                 </button>
                 <button onClick={() => void callApi()}>Call Api</button>
+                <button onClick={() => void auth.signinSilent()}>Use Refresh token</button>
             </div>
         );
     }
