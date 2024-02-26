@@ -4,9 +4,9 @@ import * as ReactDOM from "react-dom";
 import { AuthProvider, useAuth } from "../src/.";
 
 const oidcConfig = {
-    authority: "<your authority>",
-    client_id: "<your client id>",
-    redirect_uri: "<your redirect uri>",
+    authority: "https://localhost:5001",
+    client_id: "js_oidc",
+    redirect_uri: "http://localhost:1234/",
 };
 
 function App() {
