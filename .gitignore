@@ -17,3 +17,6 @@ node_modules/
 *.log
 .DS_Store
 temp/
+
+# Jetbrains IDEs
+.idea/
