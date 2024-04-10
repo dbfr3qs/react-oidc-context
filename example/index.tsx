@@ -27,7 +27,7 @@ function App() {
         try {
             const url = "https://localhost:5005/identity";
             const token = auth.user?.access_token;
-            const DPoPProof = await auth.user?.dpopProof(url) as string;
+            const DPoPProof = await auth.dpopProof(url, auth.user as User);
 
             const response = await fetch("https://localhost:5005/identity", {
                 credentials: "include",

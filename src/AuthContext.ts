@@ -30,6 +30,7 @@ export interface AuthContextProps extends AuthState {
     revokeTokens(types?: RevokeTokensTypes): Promise<void>;
     startSilentRenew(): void;
     stopSilentRenew(): void;
+    dpopProof(url: string, user: User, httpMethod?: string): Promise<string | undefined>;
 }
 
 /**

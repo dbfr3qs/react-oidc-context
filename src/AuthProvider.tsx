@@ -119,6 +119,7 @@ const userManagerContextKeys = [
     "revokeTokens",
     "startSilentRenew",
     "stopSilentRenew",
+    "dpopProof",
 ] as const;
 const navigatorKeys = [
     "signinPopup",
@@ -280,6 +281,12 @@ export const AuthProvider = (props: AuthProviderProps): JSX.Element => {
         [userManagerContext.signoutSilent],
     );
 
+    const dpopProof = useCallback(
+        (url: string, user: User, httpMethod?: string) =>
+            userManagerContext.dpopProof(url, user, httpMethod),
+        [userManagerContext.dpopProof],
+    );
+
     return (
         <AuthContext.Provider
             value={{
@@ -289,6 +296,7 @@ export const AuthProvider = (props: AuthProviderProps): JSX.Element => {
                 signoutRedirect,
                 signoutPopup,
                 signoutSilent,
+                dpopProof,
             }}
         >
             {children}
