@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { User } from "oidc-client-ts";
+import { User, IndexedDbDPoPStore } from "oidc-client-ts";
 import { AuthProvider, useAuth, type AuthProviderProps } from "../src/.";
 
 const onSigninCallback = (_user: User | void): void => {
@@ -17,7 +17,7 @@ const oidcConfig: AuthProviderProps = {
     onSigninCallback: onSigninCallback,
     scope: "openid profile email offline_access",
     monitorSession: true,
-    dpop: { bind_authorization_code: true },
+    dpop: { bind_authorization_code: true, store: new IndexedDbDPoPStore() },
 };
 
 function App() {
