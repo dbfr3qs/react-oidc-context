@@ -27,9 +27,10 @@ function App() {
         try {
             const url = "https://localhost:5005/identity";
             const token = auth.user?.access_token;
-            const DPoPProof = await auth.dpopProof(url, auth.user as User);
+            const nonce = sessionStorage.getItem("api_nonce");
+            let DPoPProof = await auth.dpopProof(url, auth.user as User, "GET", (nonce === null ? undefined : nonce));
 
-            const response = await fetch("https://localhost:5005/identity", {
+            let response = await fetch("https://localhost:5005/identity", {
                 credentials: "include",
                 mode: "cors",
                 method: "GET",
@@ -38,6 +39,21 @@ function App() {
                     DPoP: DPoPProof,
                 },
             });
+
+            if (response.headers.has("Dpop-Nonce")) {
+                const nonce = response.headers.get("Dpop-Nonce") as string;
+                DPoPProof = await auth.dpopProof(url, auth.user as User, "GET", nonce);
+                sessionStorage.setItem("api_nonce", nonce);
+                response = await fetch("https://localhost:5005/identity", {
+                    credentials: "include",
+                    mode: "cors",
+                    method: "GET",
+                    headers: {
+                        Authorization: `DPoP ${token}`,
+                        DPoP: DPoPProof,
+                    },
+                });
+            }
             console.log(await response.json());
         } catch (e) {
             console.error(e);

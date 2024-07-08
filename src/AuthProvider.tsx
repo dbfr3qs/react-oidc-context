@@ -282,8 +282,8 @@ export const AuthProvider = (props: AuthProviderProps): JSX.Element => {
     );
 
     const dpopProof = useCallback(
-        (url: string, user: User, httpMethod?: string) =>
-            userManagerContext.dpopProof(url, user, httpMethod),
+        (url: string, user: User, httpMethod?: string, nonce?: string) =>
+            userManagerContext.dpopProof(url, user, httpMethod, nonce),
         [userManagerContext.dpopProof],
     );
 
